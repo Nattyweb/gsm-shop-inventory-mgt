@@ -1,0 +1,22 @@
+{
+  "name": "gsm-shop-inventory-mgt",
+  "version": "1.0.0",
+  "description": "An App to manage GSM shop Inventory",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nattyweb/gsm-shop-inventory-mgt.git"
+  },
+  "keywords": [
+    "gsm-shop"
+  ],
+  "author": "Group 5 Backend track",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nattyweb/gsm-shop-inventory-mgt/issues"
+  },
+  "homepage": "https://github.com/Nattyweb/gsm-shop-inventory-mgt#readme"
+}
