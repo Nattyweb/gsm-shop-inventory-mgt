@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nattyweb/gsm-shop-inventory-mgt.git"
+    "url": "git+https://github.com/profalphon/gsm-shop-inventory-mgt.git"
   },
   "keywords": [
     "gsm-shop"
@@ -16,7 +16,7 @@
   "author": "Group 5 Backend track",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Nattyweb/gsm-shop-inventory-mgt/issues"
+    "url": "https://github.com/profalphon/gsm-shop-inventory-mgt/issues"
   },
-  "homepage": "https://github.com/Nattyweb/gsm-shop-inventory-mgt#readme"
+  "homepage": "https://github.com/profalphon/gsm-shop-inventory-mgt#readme"
 }
