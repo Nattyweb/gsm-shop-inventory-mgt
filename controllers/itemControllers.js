@@ -1,16 +1,17 @@
 // ...
 const express = require('express');
 const mongoose = require('mongoose');
-const itemModel = require('../models/itemModels');
+const itemModel = require('../models/itemModel');
+const Joi = require("joi");
 
 //______________________________________
 //--------------------------------------
 
 //create item
-module.exports.createItems = async (req, res, Next) => {
+module.exports.createItem = async (req, res, Next) => {
   const {name, category, brand, description, price} = req.body
   //validate that the required item details are entered correctly
-  const schema = Joi.object({
+  const schema = Joi.object().keys({
     name: Joi.string().min(1).max(30).required(),
     category: Joi.string().min(1).max(30).required(),
     brand: Joi.string().min(1).max(30).required(),
@@ -18,39 +19,47 @@ module.exports.createItems = async (req, res, Next) => {
     price: Joi.string().min(1).max(30).required()
   });
   
+  const {error} = schema.validate(req.body);
+  if(error) return res.send(error.details[0]. message);
+  
   newItem = {
     name,
     category,
     brand,
     description,
     price,
-    vendor-id: req.params.id
+    userId: req.user._id
   }
   
-  const item = new itemModel(request.body);
+  const item = new itemModel(newItem);
 
   try {
     await item.save();
-    res.send(item);
+    return res.json({msg: "item added", item});
   } catch (error) {
-    res.status(500).send(error);
+    return res.status(500).send(error);
   }
-});
+};
 
 //______________________________________
 //--------------------------------------
 
 //delete item
-exports.deleteItems = async (req, res) => {
+exports.deleteItem = async (req, res) => {
   try {
-    const item = await itemModel.findByIdAndDelete(req.params.id);
+    const item = await itemModel.findById(req.params.id);
 
-    if (!item) response.status(404).send("No item found");
-    res.status(200).send();
+    if(!item) return res.status(404).send("No item found");
+    
+    if(item.userId != req.user._id) return res.status(400).send("You can't delete this Item")
+    
+    await userModel.findByIdAndDelete(req.params.id)
+    
+    return res.status(200).send("item deleted");
   } catch (error) {
     res.status(500).send(error);
   }
-});
+};
 
 //______________________________________
 //--------------------------------------
@@ -64,19 +73,19 @@ exports.updateItem = async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
-});
+};
 
 //______________________________________
 //--------------------------------------
 
 //view all items
-module.exports.viewAllItems = async (req, res) => {
-  const items = await userModel.find({req.params.user-id}).populate("Items");
-  
-  if(!items) return res.send("The user currently does not have any item")
-
+module.exports.viewAllItemsOfUser = async (req, res) => {
   try {
-    res.send(items);
+    const items = await itemModel.findById({userId: req.user._id});
+    
+    if(!items) return res.send("The user currently does not have any item");
+    
+    return res.status(201).send(items);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -86,10 +95,10 @@ module.exports.viewAllItems = async (req, res) => {
 //--------------------------------------
 
 //view specifi items
-module.exports.viewSpecificItem = async (req, res) => {
-  const item = await userModel.find({user-id === req.params.user-id}).populate('Items')
+module.exports.viewSpecificItemOfUser = async (req, res) => {
+  const item = await userModel.find({userId: req.user._id, id: req.params.id})
   
-  if(!item) return res.send("No item found")
+  if(!item) return res.status(404).send("No item found")
 
   try {
     res.send(item);

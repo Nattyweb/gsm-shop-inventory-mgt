@@ -10,14 +10,7 @@ const methodOverride = require('method-override');
 
 const app = express();
 
-// Middleware
-app.use(methodOverride('_method'));
 
-// Mongo URI
-const mongoURI = 'mongodb://brad:brad@ds257838.mlab.com:57838/mongouploads';
-
-// Create mongo connection
-const conn = mongoose.createConnection(mongoURI);
 
 // Init gfs
 let gfs;

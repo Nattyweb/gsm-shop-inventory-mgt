@@ -6,10 +6,8 @@ const itemSchema = new Schema({
     category: String,
     brand: String,
     description: String,
-    price: String
-    User-id: [{
-      type: Schema.Types.ObjectId,
-      ref: 'User' }]
+    price: String,
+    userId: String
   });
 
 

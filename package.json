@@ -4,7 +4,8 @@
   "description": "An App to manage GSM shop Inventory",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,16 @@
   "bugs": {
     "url": "https://github.com/Nattyweb/gsm-shop-inventory-mgt/issues"
   },
-  "homepage": "https://github.com/Nattyweb/gsm-shop-inventory-mgt#readme"
+  "homepage": "https://github.com/Nattyweb/gsm-shop-inventory-mgt#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
 }

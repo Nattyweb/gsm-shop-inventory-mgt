@@ -2,21 +2,22 @@
 const express = require('express');
 const router = express.Router();
 const itemControllers = require("../controllers/itemControllers");
+const userAuth = require("../middlewares/userAuth");
 
 //create item
-router.post("/createitem/:user-id", itemControllers.createItem);
+router.post("/create", userAuth, itemControllers.createItem);
 
 //view all items
-router.get("/items:user-id", itemControllers.viewAllItems);
+router.get("/", userAuth, itemControllers.viewAllItemsOfUser);
 
 //view specific item 
-router.get("/:item-id/:user-id", itemControllers.viewSpecificItem);
+router.get("/:itemId", userAuth,  itemControllers.viewSpecificItemOfUser);
 
 
 //update item details
-router.put("/user/updateitem", itemControllers.updateItem);
+router.put("/update", userAuth, itemControllers.updateItem);
 
 //delete item
-router.delete("/item/delete", itemControllers.deleteItem);
+router.delete("/delete", userAuth,  itemControllers.deleteItem);
 
 module.exports = router
